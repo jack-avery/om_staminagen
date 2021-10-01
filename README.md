@@ -19,3 +19,6 @@ pip install -r requirements.txt
 ```
 generator.py --osu <path_to_.osu_file> --until <time_in_seconds>
 ```
+
+## Sample
+A vast majority of [this map](https://osu.ppy.sh/beatmapsets/1591497#mania/3250463) was made using this utility.
