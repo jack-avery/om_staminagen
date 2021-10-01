@@ -14,7 +14,8 @@ pip install -r requirements.txt
 ## Usage
 1. Ensure that your .osu file is in **Mania-only** mode. (Mode: 3)
 2. Have your first **uninherited** timing point be where you want the program to start charting.
-3. Run this command, replacing <> with appropriate information:
+3. Have **no notes placed**, meaning the .osu file is empty after [HitObjects].
+4. Run this command, replacing <> with appropriate information:
 ```
 generator.py --osu <path_to_.osu_file> --until <time_in_seconds>
 ```
