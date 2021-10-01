@@ -71,6 +71,7 @@ def generate(osu:str, until:int):
     previous_pattern = '0'
     current_pattern = '0'
     while time < until:
+        # We don't want our next pattern to be the same as the last
         while current_pattern == previous_pattern:
             current_pattern = patternlist[randint(0,len(patternlist)-1)]
 
