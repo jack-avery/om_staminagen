@@ -31,7 +31,7 @@ patterns = [
     '123424'
 ]
 
-def flip_hori(pattern:str) -> str:
+def flip_horizontal(pattern:str) -> str:
     """Flip a pattern horizontally.
     
     :param pattern: The pattern to flip horizontally.
@@ -50,12 +50,24 @@ def flip_hori(pattern:str) -> str:
     
     return ''.join(pattern)
 
-def flip_vert(pattern:str) -> str:
+def flip_vertical(pattern:str) -> str:
     """Flip a pattern vertically.
 
     :param pattern: The pattern to flip vertically.
     """
     return pattern[::-1]
+
+def would_jack(pattern1:str,pattern2:str) -> bool:
+    """Determines whether two patterns would create a jack.
+
+    :param pattern1: The first pattern.
+
+    :param pattern2: The second pattern.
+    """
+    if pattern1[-1] == pattern2[0]:
+        return True
+    else:
+        return False
 
 def convert_to_pos(pattern:str) -> list:
     """Converts the pattern to a list of osu! mania positions.
