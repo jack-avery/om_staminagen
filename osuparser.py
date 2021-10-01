@@ -1,5 +1,5 @@
 ###
-#   .osu parser for o!m Stamina Generator utility
+#   .osu parser for o!m 4K Stamina Generator utility
 #   raspy#0292 - raspy_on_osu
 ###
 
@@ -23,11 +23,16 @@ def parse(osu: str) -> dict:
 
     # Parsing the file initially
     invalid_mode_re = re.compile('(Mode:\s[0-2]+)')
+    invalid_cs_re = re.compile('(CircleSize:\s[0-35-9]+)')
     for i,line in enumerate(lines):
 
         # If the mode is not osu!mania, raise an InvalidOsuModeError
         if invalid_mode_re.match(line):
             raise InvalidOsuModeError(f"{osu} is not osu!mania mode")
+
+        # If the mode is not 4 keys, raise an InvalidOsuModeError
+        if invalid_cs_re.match(line):
+            raise InvalidOsuModeError(f"{osu} is not 4 keys mania")
 
         # Finding our timing points
         if "[TimingPoints]" in line:

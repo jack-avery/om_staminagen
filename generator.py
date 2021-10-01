@@ -1,5 +1,5 @@
 ###
-#   Main generation module for o!m Stamina Generator utility
+#   Main generation module for o!m 4K Stamina Generator utility
 #   raspy#0292 - raspy_on_osu
 ###
 
@@ -8,7 +8,7 @@ import click
 import logging
 from datetime import datetime
 import osuparser
-from errors import InvalidOsuModeError, NoInformationFoundError
+import patterns
 
 @click.command()
 @click.option(
@@ -44,9 +44,13 @@ def generate(osu:str, until:int):
     # Parse the .osu file
     logger.info(f"Attempting to parse {osu}...")
     osu_info = osuparser.parse(osu)
+    time = osu_info['starttime']
+    beat = osu_info['beatlength']
     logger.info("Parsed! Found:\n"
-            +f"     starttime={osu_info['starttime']}\n"
-            +f"     beatlength={osu_info['beatlength']}")
+            +f"     starttime={time}\n"
+            +f"     beatlength={beat}")
+
+    om_note_template = '<pos>,192,<ms>,1,0,0:0:0:0:'
 
 if __name__ == "__main__":
     generate()
