@@ -21,4 +21,4 @@ generator.py --osu <path_to_.osu_file> --until <time_in_seconds>
 ```
 
 ## Sample
-A vast majority of [this map](https://osu.ppy.sh/beatmapsets/1591497#mania/3250463) was made using this utility.
+A vast majority of [this map](https://osu.ppy.sh/beatmapsets/1591497#mania/3250463) was made using this utility. [(video)](https://youtu.be/D0wiLIq12lY)
