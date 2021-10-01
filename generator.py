@@ -69,17 +69,19 @@ def generate(osu:str, until:int):
 
     # Generate new patterns until the specified time is reached
     previous_pattern = '0'
+    current_pattern = '0'
     while time < until:
-        current_pattern = patternlist[randint(0,len(patternlist)-1)]
+        while current_pattern == previous_pattern:
+            current_pattern = patternlist[randint(0,len(patternlist)-1)]
 
-        # Determine whether this should vertically flip (see VERTICAL_FLIP_CHANCE)
-        if randint(0,VERTICAL_FLIP_CHANCE) == VERTICAL_FLIP_CHANCE:
-            current_pattern = patterns.flip_vertical(current_pattern)
+            # Determine whether this should vertically flip (see VERTICAL_FLIP_CHANCE)
+            if randint(0,VERTICAL_FLIP_CHANCE) == VERTICAL_FLIP_CHANCE:
+                current_pattern = patterns.flip_vertical(current_pattern)
 
-        # Determine whether the patterns would result in a jack,
-        # and flip horizontally if they would to avoid this
-        if patterns.would_jack(previous_pattern,current_pattern):
-            current_pattern = patterns.flip_horizontal(current_pattern)
+            # Determine whether the patterns would result in a jack,
+            # and flip horizontally if they would to avoid this
+            if patterns.would_jack(previous_pattern,current_pattern):
+                current_pattern = patterns.flip_horizontal(current_pattern)
         
         # Generate the notes from the pattern chosen...
         for note in patterns.convert_to_pos(current_pattern):

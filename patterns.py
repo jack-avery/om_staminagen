@@ -29,7 +29,9 @@ patterns = [
     '12321',
     '1234',
     '1234231',
-    '123424'
+    '123424',
+    '2314',
+    '314'
 ]
 
 def flip_horizontal(pattern:str) -> str:
