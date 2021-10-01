@@ -23,6 +23,7 @@ Checks are done automatically to ensure no jacks are in the map.
 These patterns may be flipped horizontally or vertically.
 """
 
+# A list of patterns. See above comment for how to add your own.
 patterns = [
     '121',
     '12321',

@@ -34,6 +34,9 @@ def generate(osu:str, until:int):
     # as 1 / VERTICAL_FLIP_CHANCE
     VERTICAL_FLIP_CHANCE = 2
 
+    # The template for osu! Mania hitnotes.
+    OM_NOTE_TEMPLATE = '<pos>,192,<ms>,1,0,0:0:0:0:'
+
     # Set up logging
     logger = logging.getLogger(__name__)
 
@@ -59,32 +62,43 @@ def generate(osu:str, until:int):
             +f"     starttime={time}\n"
             +f"     beatlength={beat}")
 
-    om_note_template = '<pos>,192,<ms>,1,0,0:0:0:0:'
+    # Set up for notes creation
     notes = list()
     patternlist = patterns.patterns
-    
     logger.info("Generating notes...")
+
+    # Generate new patterns until the specified time is reached
     previous_pattern = '0'
     while time < until:
         current_pattern = patternlist[randint(0,len(patternlist)-1)]
 
+        # Determine whether this should vertically flip (see VERTICAL_FLIP_CHANCE)
         if randint(0,VERTICAL_FLIP_CHANCE) == VERTICAL_FLIP_CHANCE:
             current_pattern = patterns.flip_vertical(current_pattern)
 
+        # Determine whether the patterns would result in a jack,
+        # and flip horizontally if they would to avoid this
         if patterns.would_jack(previous_pattern,current_pattern):
             current_pattern = patterns.flip_horizontal(current_pattern)
         
+        # Generate the notes from the pattern chosen...
         for note in patterns.convert_to_pos(current_pattern):
-            note = om_note_template.replace("<pos>",note)
+            # Replacing info in the template to generate the note
+            note = OM_NOTE_TEMPLATE.replace("<pos>",note)
             note = note.replace("<ms>",str(mstime))
+
+            # Adding newline and appending to notes list
             note += "\n"
             notes.append(note)
 
+            # Advancing time forward and rounding for ms time
             time+=beat/4
             mstime = round(time)
 
+        # Designate the current pattern as the previous.
         previous_pattern = current_pattern
     
+    # Write the new notes to the file.
     logger.info("Generated! Writing to file...")
     with open(osu,"r") as osufile:
         lines = osufile.readlines()
@@ -94,6 +108,7 @@ def generate(osu:str, until:int):
     with open(osu,"w") as osufile:
         osufile.writelines(lines)
 
+    # Inform the user that the operation is complete.
     logger.info("Done!")
 
 if __name__ == "__main__":
