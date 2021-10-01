@@ -1,6 +1,6 @@
 ###
 #   .osu parser for o!m Stamina Generator utility
-#   raspy#0292
+#   raspy#0292 - raspy_on_osu
 ###
 
 import re
