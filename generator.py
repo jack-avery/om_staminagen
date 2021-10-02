@@ -7,7 +7,6 @@ import sys
 import logging
 from random import randint
 import click
-from datetime import datetime
 import osuparser
 import patterns
 
